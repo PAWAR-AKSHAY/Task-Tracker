@@ -18,11 +18,23 @@ export class TasksComponent implements OnInit {
   //   this.tasks = this.taskService.getTasks();
   // }
 
+  // Using Observable & Without Http Client
+  // ngOnInit(): void {
+  //  this.taskService.getTasks().subscribe(
+  //    tasks => this.tasks=tasks
+  //    );
+  // }
+
+  // Using Observable & Http Client
   ngOnInit(): void {
    this.taskService.getTasks().subscribe(
      tasks => this.tasks=tasks
      );
   }
 
-
+  deleteTask(task: Task) {
+    this.taskService.deleteTask(task).subscribe(
+      () => this.tasks = this.tasks.filter(t => t.id !== task.id)
+    )
+  }
 }
